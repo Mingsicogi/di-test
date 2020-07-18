@@ -19,12 +19,10 @@ public class StudentCourse {
     @Column(name = "student_course_id")
     private Long id;
 
-//    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "student_id")
     private Student student;
 
-//    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;

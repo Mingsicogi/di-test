@@ -26,11 +26,17 @@ public class Course {
     @JoinColumn(name = "professor_id")
     private Professor professor; // 담당 교수
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "course")
     private List<StudentCourse> students = new ArrayList<>();
 
     public Course(String courseName, Integer courseScore) {
         this.courseName = courseName;
         this.courseScore = courseScore;
+    }
+
+    // 양방향 데이터 매핑
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+        professor.getCourses().add(this);
     }
 }

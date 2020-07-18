@@ -21,7 +21,7 @@ public class Student {
     private String name;
     private Integer age;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "student")
     private List<StudentCourse> courses = new ArrayList<>();
 
     public Student(String name, Integer age) {

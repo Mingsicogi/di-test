@@ -2,12 +2,11 @@ package mins.study.ditest.controller;
 
 import lombok.RequiredArgsConstructor;
 import mins.study.ditest.entity.Course;
+import mins.study.ditest.entity.Professor;
 import mins.study.ditest.repository.CourseRepository;
+import mins.study.ditest.repository.ProfessorRepository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CourseController {
 
     private final CourseRepository courseRepository;
+    private final ProfessorRepository professorRepository;
 
     @PostMapping
     public ResponseEntity<Object> add(String courseName, Integer courseScore) {
@@ -28,5 +28,15 @@ public class CourseController {
     public ResponseEntity<Object> get(Long courseId) {
         Course course = courseRepository.findById(courseId).orElseThrow();
         return ResponseEntity.ok(course);
+    }
+
+    @PutMapping
+    public ResponseEntity<Object> put(Long courseId, Long professorId) {
+        Course course = courseRepository.findById(courseId).orElseThrow();
+        Professor professor = professorRepository.findById(professorId).orElseThrow();
+
+        course.setProfessor(professor);
+
+        return ResponseEntity.ok(courseRepository.save(course));
     }
 }

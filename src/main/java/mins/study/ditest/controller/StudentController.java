@@ -1,6 +1,7 @@
 package mins.study.ditest.controller;
 
 import lombok.RequiredArgsConstructor;
+import mins.study.ditest.dto.StudentDTO;
 import mins.study.ditest.entity.Course;
 import mins.study.ditest.entity.Student;
 import mins.study.ditest.entity.StudentCourse;
@@ -30,11 +31,7 @@ public class StudentController {
     @GetMapping
     public ResponseEntity<Object> get(Long studentId) {
         Student student = studentRepository.findById(studentId).orElseThrow();
-        student.getCourses().stream().forEach(studentCourse -> {
-            Course course = studentCourse.getCourse();
-            course.getStudents();
-        });
-        return ResponseEntity.ok(student);
+        return ResponseEntity.ok(StudentDTO.entityToDto(student));
     }
 
     @PostMapping(value = "/course/register")

@@ -22,7 +22,6 @@ public class Course {
     private String courseName;
     private Integer courseScore; // 학점
 
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "professor_id")
     private Professor professor; // 담당 교수

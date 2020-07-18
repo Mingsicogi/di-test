@@ -21,17 +21,11 @@ public class Student {
     private String name;
     private Integer age;
 
-    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "course")
     private List<StudentCourse> courses = new ArrayList<>();
 
     public Student(String name, Integer age) {
         this.name = name;
         this.age = age;
-    }
-
-    public void setCourse(Course course) {
-        StudentCourse studentCourse = new StudentCourse(this, course);
-        this.getCourses().add(studentCourse);
-        course.getStudents().add(studentCourse);
     }
 }

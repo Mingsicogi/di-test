@@ -42,9 +42,6 @@ public class StudentController {
         Student student = studentRepository.findById(studentId).orElseThrow();
         Course course = courseRepository.findById(courseId).orElseThrow();
 
-        student.setCourse(course);
-        courseRepository.save(course);
-
-        return ResponseEntity.ok(studentRepository.save(student));
+        return ResponseEntity.ok(studentCourseRepository.save(new StudentCourse(student, course)));
     }
 }
